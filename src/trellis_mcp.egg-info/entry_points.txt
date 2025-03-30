@@ -1,0 +1,2 @@
+[console_scripts]
+trellis-mcp = server:main

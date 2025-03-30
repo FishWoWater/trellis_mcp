@@ -1,0 +1,4 @@
+aiohttp>=3.11.13
+mcp[cli]>=1.4.1
+
+[dev]
