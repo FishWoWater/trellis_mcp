@@ -15,6 +15,7 @@ So use it at your own risk.
 
 ## Demo 
 > A minimal demo for generating a single object, more complicated prompt with blender-mcp is under tuning.
+
 ![Demo](assets/trellis_mcp_demo.gif)
 
 ## Features
