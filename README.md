@@ -4,7 +4,7 @@ Trellis MCP provides an interface between AI assistants and [Trellis](https://gi
 
 ### Disclaimer
 This project shows a very **minimal** integration of MCP with [Trellis](https://github.com/microsoft/TRELLIS): a lightweight and opensource text-to-3d/image-to-3d 3DAIGC model. Compared with existing [rodin integration in blender-mcp](https://github.com/ahujasid/blender-mcp) and [tripo integration](https://github.com/VAST-AI-Research/tripo-mcp), it has following advantages: 
-* **Faster and memory-efficient**: You can deploy the TRELLIS API on your own PC with only 8GPU+ VRAM, while can generate a textured mesh from text in only ~15s.
+* **Faster and memory-efficient**: You can deploy TRELLIS **locally with only 8GPU+ VRAM**, while can generate a textured mesh from text in only *~15s*(10s with more vram).
 * **FREE**: You DON'T have to pay expensive API from Rodin/Meshy/Tripo.
 
 **BUT IT HAS FOLLOWING LIMITATIONS:**
@@ -13,6 +13,9 @@ This project shows a very **minimal** integration of MCP with [Trellis](https://
 
 So use it at your own risk. 
 
+## Demo 
+> A minimal demo for generating a single object, more complicated prompt with blender-mcp is under tuning.
+![Demo](assets/trellis_mcp_demo.gif)
 
 ## Features
 
