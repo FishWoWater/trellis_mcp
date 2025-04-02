@@ -145,15 +145,52 @@ class TrellisClient:
         data = await self._request("GET", "/my_requests")
         return [Task.from_dict(task) for task in data.get("requests", [])]
     
+    async def image_to_3d(
+        self,
+        image_base64: str,
+        geometry_sample_steps: int = 12,
+        geometry_cfg_strength: float = 7.5,
+        texture_sample_steps: int = 12,
+        texture_cfg_strength: float = 3.5,
+    ) -> str:
+        """
+        Create a 3D model from text.
+        
+        Args:
+            prompt: The text prompt describing the model to create.
+            negative_prompt: Text describing what to avoid in the model.
+            sample_steps: Number of sampling steps.
+            cfg_strength: Classifier-free guidance strength.
+            seed: Random seed for generation (-1 for random).
+            
+        Returns:
+            The request ID of the created task.
+        """
+        form_data = {
+            "image_name": "", 
+            "image_data": image_base64,
+            "ss_sample_steps": str(geometry_sample_steps),
+            "ss_cfg_strength": str(geometry_cfg_strength),
+            "slat_sample_steps": str(texture_sample_steps), 
+            "slat_cfg_strength": str(texture_cfg_strength), 
+        }
+        
+        data = await self._request(
+            "POST", 
+            "/image_to_3d",
+            data=form_data
+        )
+        
+        return data.get("request_id", "")
+
     async def text_to_3d(
         self,
         prompt: str,
         negative_prompt: str = "",
         geometry_sample_steps: int = 12,
         geometry_cfg_strength: float = 7.5,
-        texture_sample_steps: int = 12, 
-        texture_cfg_strength: float = 3.5, 
-        seed: int = -1,
+        texture_sample_steps: int = 12,
+        texture_cfg_strength: float = 3.5,
     ) -> str:
         """
         Create a 3D model from text.
@@ -175,22 +212,7 @@ class TrellisClient:
             "ss_cfg_strength": str(geometry_cfg_strength),
             "slat_sample_steps": str(texture_sample_steps), 
             "slat_cfg_strength": str(texture_cfg_strength), 
-            "seed": str(seed),
         }
-        
-        # TODO: migrate this dv (detail variation) mode into another entrypoint
-        # files = {}
-        
-        # If in detail variation mode and a mesh input is provided
-        # if is_dv_mode and mesh_input_path:
-        #     if not os.path.exists(mesh_input_path):
-        #         raise ValueError(f"Mesh input file not found: {mesh_input_path}")
-            
-        #     files["mesh_input"] = (
-        #         os.path.basename(mesh_input_path),
-        #         open(mesh_input_path, "rb"),
-        #         "application/octet-stream"
-        #     )
         
         data = await self._request(
             "POST", 
@@ -203,9 +225,9 @@ class TrellisClient:
    
     
     async def poll_task_status(
-        self, 
-        request_id: str, 
-        interval: float = 5.0, 
+        self,
+        request_id: str,
+        interval: float = 5.0,
         max_attempts: int = 60
     ) -> Task:
         """
@@ -224,7 +246,6 @@ class TrellisClient:
         """
         for _ in range(max_attempts):
             task = await self.get_task(request_id)
-            task.status = task.status.upper()
             
             if task.status in [TaskStatus.COMPLETE, TaskStatus.ERROR]:
                 return task

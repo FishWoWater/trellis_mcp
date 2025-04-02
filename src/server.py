@@ -138,7 +138,7 @@ class BlenderConnection:
 
             # Send the command
             self.sock.sendall(json.dumps(command).encode("utf-8"))
-            logger.info(f"Command sent, waiting for response...")
+            logger.info("Command sent, waiting for response...")
 
             # Set a timeout for receiving - use the same timeout as in receive_full_response
             self.sock.settimeout(15.0)  # Match the addon's timeout
@@ -725,9 +725,8 @@ def asset_creation_strategy() -> str:
     - The task specifically requires a basic material/color
     """
 
-# TODO 1: add create from images 
-# TODO 2: add get trellis status 
-# TODO 3: should compatible the status
+# TODO 1: add create from images
+# TODO 2: add get trellis status
 
 @mcp.tool("create_3d_model_from_text_trellis")
 async def create_3d_model_from_text_trellis(
@@ -772,7 +771,7 @@ async def create_3d_model_from_text_trellis(
             
             if not task_id:
                 return {
-                    "error": "Failed to start text-to-3D task. No request ID returned."
+                    "error": "Failed to start text-to-3D task. No task ID returned."
                 }
             
             return {
@@ -792,10 +791,6 @@ async def create_3d_model_from_text_trellis(
     except Exception as e:
         logger.error(f"Error creating 3D model from text: {e}")
         return {"error": str(e)}
-
-        
-
-
 
 @mcp.tool("get_trellis_task_status")
 async def get_trellis_task_status(task_id: str) -> Dict[str, Any]:
