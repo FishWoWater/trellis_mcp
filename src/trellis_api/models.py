@@ -10,10 +10,10 @@ import datetime
 
 class TaskStatus(str, Enum):
     """Task status enum."""
-    QUEUED = "queued"
-    PROCESSING = "processing"
-    COMPLETE = "complete"
-    ERROR = "error"
+    QUEUED = "QUEUED"
+    PROCESSING = "PROCESSING"
+    COMPLETE = "COMPLETE"
+    ERROR = "ERROR"
 
 
 @dataclass
@@ -36,7 +36,7 @@ class Task:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'Task':
         """Create a Task from a dictionary."""
-        status_str = data.get('status', 'ERROR')
+        status_str = data.get('status', 'ERROR').upper()
         try:
             status = TaskStatus(status_str)
         except ValueError:

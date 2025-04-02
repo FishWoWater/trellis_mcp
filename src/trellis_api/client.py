@@ -224,6 +224,7 @@ class TrellisClient:
         """
         for _ in range(max_attempts):
             task = await self.get_task(request_id)
+            task.status = task.status.upper()
             
             if task.status in [TaskStatus.COMPLETE, TaskStatus.ERROR]:
                 return task
