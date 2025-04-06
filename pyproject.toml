@@ -1,6 +1,6 @@
 [project]
 name = "trellis-mcp"
-version = "0.1.0"
+version = "0.1.2"
 description = "MCP (Model Control Protocol) integration for Trellis"
 authors = [
     {name = "FishWoWater", email = "dreamboy.gns@gmail.com"},

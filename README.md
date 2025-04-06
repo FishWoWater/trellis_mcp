@@ -55,17 +55,10 @@ python trellis_api/web_server.py
 ```
 
 #### 3. Configure the MCP server on Windsurf/Cursor/Claude 
-``` shell 
-# first install uv
-# on mac os 
-# brew install uv  
-pip install uv 
-
-# paste into windsurf mcp servers 
-"""
+```text 
 {
     "mcpServers": {
-        "blender": {
+        "trellis-blender": {
             "command": "uvx",
             "args": [
                 "trellis-mcp"
@@ -73,11 +66,6 @@ pip install uv
         }
     }
 }
-"""
-
-# for debugging 
-git clone https://github.com/FishWoWater/trellis-mcp
-uv run main.py 
 ```
 
 ## Acknowledgements
