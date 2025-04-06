@@ -16,7 +16,7 @@ So use it at your own risk.
 ## Demo 
 > A minimal demo for generating a single object, more complicated prompt with blender-mcp is under tuning.
 
-![Demo](assets/trellis_mcp_demo.gif)
+![Demo](assets/trellis_mcp_demo2.gif)
 
 ## Features
 
@@ -30,7 +30,7 @@ So use it at your own risk.
 - [Blender](https://www.blender.org/download/)
 - [Trellis Blender Addon](https://github.com/FishWoWater/trellis_blender)
 - [Trellis API Backend](https://github.com/FishWoWater/TRELLIS)
-- Claude / Cursor / Windsurf
+- Claude / Cursor(SUGGESTED) / Windsurf
 
 ### Installation
 #### 1. Trellis blender addon 
@@ -48,10 +48,14 @@ cd TRELLIS
 # EDIT BACKEND URL in trellis_api/config.py
 
 # configure the # of text workers and start ai worker
+# no need for image workers 
 python trellis_api/ai_worker.py --text-workers-per-gpu 1 --image-workers-per-gpu 0
 
 # start web server 
 python trellis_api/web_server.py 
+
+# or on windows local dev 
+python trellis_api/web_server_single.py 
 ```
 
 #### 3. Configure the MCP server on Windsurf/Cursor/Claude 
